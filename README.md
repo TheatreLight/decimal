@@ -8,4 +8,4 @@ make test - build and run unit-tests (need a check.h lib);
 
 make gcov_report - build an html-report (need an lcov).
 
-THE PROJET IS STILL UNDER DEVELOPMENT
+
