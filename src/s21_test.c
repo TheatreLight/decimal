@@ -11,7 +11,6 @@ START_TEST(s21_add_test1) {
     s21_decimal y;
     s21_decimal actual_res;
     s21_decimal expected_result;
-    // char str[128] = {0};
     s21_init_decimal(&x);
     s21_init_decimal(&y);
     s21_init_decimal(&actual_res);
@@ -24,10 +23,6 @@ START_TEST(s21_add_test1) {
     ck_assert_int_eq(actual_res.bits[LOW], expected_result.bits[LOW]);
     ck_assert_int_eq(actual_res.bits[MID], expected_result.bits[MID]);
     ck_assert_int_eq(actual_res.bits[HIGH], expected_result.bits[HIGH]);
-    /*   printf("\n");
-      get_bits(&expected_result, str);
-      dec_print(str);
-      printf("\n"); */
 }
 END_TEST
 
@@ -36,7 +31,6 @@ START_TEST(s21_add_test2) {
     s21_decimal y;
     s21_decimal actual_result;
     s21_decimal expected_result;
-    // char str[128] = {0};
     s21_init_decimal(&x);
     s21_init_decimal(&y);
     s21_init_decimal(&actual_result);
@@ -50,21 +44,9 @@ START_TEST(s21_add_test2) {
     expected_result.bits[MID] = 0x00000000;
     expected_result.bits[HIGH] = 0x00000000;
     actual_result = s21_add(x, y);
-    /*   printf("actual_result:\n");
-      get_bits(&actual_result, str);
-      dec_print(str);
-      printf("\n");
-      printf("expected_result:\n");
-      get_bits(&expected_result, str);
-      dec_print(str);
-      printf("\n"); */
     ck_assert_int_eq(actual_result.bits[LOW], expected_result.bits[LOW]);
     ck_assert_int_eq(actual_result.bits[MID], expected_result.bits[MID]);
     ck_assert_int_eq(actual_result.bits[HIGH], expected_result.bits[HIGH]);
-    /*   printf("expected_result\n");
-      get_bits(&expected_result, str);
-      dec_print(str);
-      printf("\n"); */
 }
 END_TEST
 
@@ -87,22 +69,9 @@ START_TEST(s21_add_test3) {
     expected_result.bits[SCALE] = 0x80000000;  // 32 разряд "-"
 
     actual_result = s21_add(x, y);
-    /*   printf("actual_result:\n");
-      get_bits(&actual_result, str);
-      dec_print(str);
-      printf("\n");
-      printf("expected_result:\n");
-      get_bits(&expected_result, str);
-      dec_print(str);
-      printf("\n"); */
-
     ck_assert_int_eq(actual_result.bits[LOW], expected_result.bits[LOW]);
     ck_assert_int_eq(actual_result.bits[MID], expected_result.bits[MID]);
     ck_assert_int_eq(actual_result.bits[HIGH], expected_result.bits[HIGH]);
-    /*   printf("expected_result\n");
-      get_bits(&expected_result, str);
-      dec_print(str);
-      printf("\n"); */
 }
 END_TEST
 
@@ -111,7 +80,6 @@ START_TEST(s21_add_test4) {
     s21_decimal y;
     s21_decimal actual_result;
     s21_decimal expected_result;
-    // char str[128] = {0};
     s21_init_decimal(&x);
     s21_init_decimal(&y);
     s21_init_decimal(&actual_result);
@@ -137,7 +105,6 @@ START_TEST(s21_add_test5) {
     s21_decimal y;
     s21_decimal actual_result;
     s21_decimal expected_result;
-    // char str[128] = {0};
     s21_init_decimal(&x);
     s21_init_decimal(&y);
     s21_init_decimal(&actual_result);
@@ -319,7 +286,6 @@ START_TEST(s21_sub_test1) {
     s21_decimal y;
     s21_decimal actual_result;
     s21_decimal expected_result;
-    // char str[128] = {0};
     s21_init_decimal(&x);
     s21_init_decimal(&y);
     s21_init_decimal(&actual_result);
@@ -344,7 +310,6 @@ START_TEST(s21_sub_test2) {
     s21_decimal y;
     s21_decimal actual_result;
     s21_decimal expected_result;
-    // char str[128] = {0};
     s21_init_decimal(&x);
     s21_init_decimal(&y);
     s21_init_decimal(&actual_result);
@@ -370,7 +335,6 @@ START_TEST(s21_sub_test3) {
     s21_decimal y;
     s21_decimal actual_result;
     s21_decimal expected_result;
-    // char str[128] = {0};
     s21_init_decimal(&x);
     s21_init_decimal(&y);
     s21_init_decimal(&actual_result);
@@ -1541,7 +1505,6 @@ START_TEST(s21_from_decimal_to_int_test1) {
     int expected_result = 4836;
     int actual_result = 0;
     s21_from_decimal_to_int(x, &actual_result);
-    // printf(" actual_result is = %d\n", actual_result);
     ck_assert_int_eq(actual_result, expected_result);
 }
 END_TEST
@@ -1588,7 +1551,6 @@ START_TEST(s21_from_decimal_to_int_test4) {
 END_TEST
 
 // s21_from_decimal_to_int_test2  with
-// ((src.bits[HIGH] != 0) || (src.bits[MID] != 0))
 START_TEST(s21_from_decimal_to_int_test5) {
     s21_decimal x;
     s21_init_decimal(&x);
@@ -1605,15 +1567,12 @@ START_TEST(s21_from_decimal_to_float_test1) {
     s21_decimal src;
     float dst = 0.0f;
     float expected_result = 0.15F;
-    // char str[128] = {0};
     s21_init_decimal(&src);
     s21_set_scale(&src, 2);
     src.bits[LOW] = 15;
     src.bits[MID] = 0;
     src.bits[HIGH] = 0;
     s21_from_decimal_to_float(src, &dst);
-    /*   printf("%f\n", dst);
-      printf("%f\n", expected_result); */
     ck_assert_msg((dst == expected_result), NULL);
 }
 END_TEST
@@ -1636,7 +1595,6 @@ START_TEST(s21_from_decimal_to_float_test3) {
     s21_decimal src;
     float dst = 0.0f;
     float expected_result = -0.15F;
-    // char str[128] = {0};
     s21_init_decimal(&src);
     s21_set_sign(&src);
     s21_set_scale(&src, 2);
@@ -1644,28 +1602,10 @@ START_TEST(s21_from_decimal_to_float_test3) {
     src.bits[MID] = 0;
     src.bits[HIGH] = 0;
     s21_from_decimal_to_float(src, &dst);
-    /*   printf("%f\n", dst);
-      printf("%f\n", expected_result); */
     ck_assert_msg((dst == expected_result), NULL);
 }
 END_TEST
 
-/* START_TEST(s21_from_float_to_decimal_test1) {
-  s21_decimal dst;
-  s21_decimal expected_result;
-  float src = -1.5f;
-  s21_init_decimal(&dst);
-  expected_result.bits[LOW] = 15;
-  expected_result.bits[MID] = 0;
-  expected_result.bits[HIGH] = 0;
-  s21_set_scale(&expected_result, 1);
-  s21_from_float_to_decimal(src, &dst);
-  ck_assert_int_eq(dst.bits[LOW], expected_result.bits[LOW]);
-  ck_assert_int_eq(dst.bits[MID], expected_result.bits[MID]);
-  ck_assert_int_eq(dst.bits[HIGH], expected_result.bits[HIGH]);
-  ck_assert_int_eq(dst.bits[SCALE], expected_result.bits[SCALE]);
-}
-END_TEST */
 
 int main(void) {
     Suite *s = suite_create("Core");
@@ -1752,7 +1692,6 @@ int main(void) {
     tcase_add_test(tcd, s21_from_decimal_to_float_test1);
     tcase_add_test(tcd, s21_from_decimal_to_float_test2);
     tcase_add_test(tcd, s21_from_decimal_to_float_test3);
-    // tcase_add_test(tcd, s21_from_float_to_decimal_test1);
     tcase_add_test(tcd, compare_test);
 
     tcase_add_test(tcd, truncate);

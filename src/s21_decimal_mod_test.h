@@ -12,7 +12,6 @@ struct mod_td {
     int conversion;
 } mod_1td[] = {
     {"1", "3", "1", SUCCESS},
-    // {"2", "-0.45", "0.2", SUCCESS},
     {"6521", "74121", "6521", SUCCESS},
     {"1", "987456321", "1", SUCCESS},
     {"-9878798789", "-3", "-2", SUCCESS},

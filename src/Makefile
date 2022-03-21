@@ -46,3 +46,6 @@ check:
 
 leaks: clean test
 	CK_FORK=no leaks --atExit --  ./s21_test.out
+
+valgrind:
+	CK_FORK=no valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --show-reachable=yes ./s21_test.out

@@ -18,28 +18,28 @@ struct from_float_to_decimal_loop {
     {0, "0", CONVERTING_ERROR, s21_NORMAL_VALUE, 1},
     {0, "0", CONVERTING_ERROR, s21_INFINITY, 0},
     {2.2e-30F, "", CONVERTING_ERROR, s21_NORMAL_VALUE, 0},
-    // {2.2e-27F, "0.0000000000000000000000000022", SUCCESS, s21_NORMAL_VALUE,
-    // 0},
+    {2.2e-27F, "0.0000000000000000000000000022", SUCCESS, s21_NORMAL_VALUE, 0},
     {2.2e30F, "", CONVERTING_ERROR, s21_NORMAL_VALUE, 0},
 };
 
 START_TEST(from_float_to_decimal_loop) {
     s21_decimal actual;
-    s21_decimal *p_to_actual = &actual;
+    s21_init_decimal(&actual);
+    int conv_act = CONVERTING_ERROR;
     if (float_to_decimal_td[_i].value_type == s21_NAN) {
         float_to_decimal_td[_i].act_float = NAN;
     } else if (float_to_decimal_td[_i].value_type == s21_INFINITY ||
                float_to_decimal_td[_i].value_type == s21_NEGATIVE_INFINITY) {
         float_to_decimal_td[_i].act_float = INFINITY;
     } else if (float_to_decimal_td[_i].is_null) {
-        p_to_actual = NULL;
+        conv_act = s21_from_float_to_decimal(float_to_decimal_td[_i].act_float, NULL);
+    } else {
+        conv_act = s21_from_float_to_decimal(float_to_decimal_td[_i].act_float, &actual);
     }
-    int conv_act = s21_from_float_to_decimal(float_to_decimal_td[_i].act_float,
-                                             p_to_actual);
     ck_assert_int_eq(conv_act, float_to_decimal_td[_i].exp_conversion);
     if (conv_act == SUCCESS) {
         char actual_string[40];
-        s21_from_decimal_to_string(*p_to_actual, actual_string);
+        s21_from_decimal_to_string(actual, actual_string);
         ck_assert_str_eq(actual_string, float_to_decimal_td[_i].expected);
     }
 }

@@ -209,7 +209,6 @@ START_TEST(is_can_div) {
   left.value_type = is_can_div_td[_i].value_type_left;
   right.value_type = is_can_div_td[_i].value_type_right;
   int actual = s21_is_can_div(left, right, &result);
-  // ck_assert_msg();
   ck_assert_int_eq(actual, is_can_div_td[_i].expected);
   ck_assert_int_eq(result.value_type, is_can_div_td[_i].expected_vt);
 }
