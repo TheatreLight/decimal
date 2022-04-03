@@ -39,19 +39,19 @@ Note that the bit representation differentiates between negative and positive ze
     Multiplication;
     Division;
     Remainder;
-2. Comparison operators:
+### 2. Comparison operators:
     Less then;
     Less then or equal to;
     Greater then;
     Greater then or equal to;
     Equal to;
     Not equalto;
-3. Convertors:
+### 3. Convertors:
     From integer to decimal;
     From float to decimal;
     From decimal to integer;
     Freom decimal to float;
-4. Another functions:
+### 4. Another functions:
     Rounds a specified Decimal number to the closest integer toward negative infinity;
     Rounds a decimal value to the nearest integer;
     Returns the integral digits of the specified Decimal (any fractional digits are discarded, including trailing zeroes);
