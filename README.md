@@ -32,8 +32,8 @@ Bit 31 contains the sign; 0 meaning positive, and 1 meaning negative.
 Note that the bit representation differentiates between negative and positive zero. These values can be treated as being equal in all operations.
 
 
-This library include itself next functions.
-1. Arithmetic operators:
+## This library include itself next functions.
+### 1. Arithmetic operators:
     Addition;
     Substraction;
     Multiplication;
