@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* 1 сложение */
+/* 1 addition */
 s21_decimal s21_add(s21_decimal x, s21_decimal y) {
     s21_decimal res;
     int scale = 0;
@@ -42,7 +42,7 @@ s21_decimal s21_add(s21_decimal x, s21_decimal y) {
     return res;
 }
 
-/* 2 вычитание */
+/* 2 substraction */
 s21_decimal s21_sub(s21_decimal x, s21_decimal y) {
     s21_decimal res;
     int scale = 0;
@@ -80,7 +80,7 @@ s21_decimal s21_sub(s21_decimal x, s21_decimal y) {
     return res;
 }
 
-/* 3 умножение */
+/* 3 multiplication */
 s21_decimal s21_mul(s21_decimal x, s21_decimal y) {
     s21_decimal res;
     s21_init_decimal(&res);
@@ -106,7 +106,7 @@ s21_decimal s21_mul(s21_decimal x, s21_decimal y) {
     return res;
 }
 
-/* 4 деление */
+/* 4 divide */
 s21_decimal s21_div(s21_decimal x, s21_decimal y) {
     s21_decimal result;
     s21_init_decimal(&result);
@@ -172,7 +172,7 @@ s21_decimal s21_div(s21_decimal x, s21_decimal y) {
     return result;
 }
 
-// /* 5 остаток */
+// /* 5 remainder */
 s21_decimal s21_mod(s21_decimal dividend, s21_decimal devisor) {
     s21_decimal mod;
     s21_init_decimal(&mod);
@@ -364,7 +364,7 @@ int s21_from_decimal_to_float(s21_decimal src, float *dst) {
     return conversion;
 }
 
-/* 16 в меньшую сторону */
+/* 16 rounding down */
 s21_decimal s21_floor(s21_decimal x) {
     s21_decimal res = x;
     if (res.value_type == s21_NORMAL_VALUE) {
@@ -398,7 +398,7 @@ s21_decimal s21_floor(s21_decimal x) {
     return res;
 }
 
-// /* 17 математическое округление */
+// /* 17 math rounding */
 s21_decimal s21_round(s21_decimal x) {
     s21_decimal res = x;
     if (res.value_type == s21_NORMAL_VALUE) {
@@ -429,7 +429,7 @@ s21_decimal s21_round(s21_decimal x) {
     return res;
 }
 
-/* 18 отброс дробной части */
+/* 18 truncate */
 s21_decimal s21_truncate(s21_decimal x) {
     s21_decimal res = x;
     if (x.value_type == s21_NORMAL_VALUE) {
@@ -449,7 +449,7 @@ s21_decimal s21_truncate(s21_decimal x) {
     return res;
 }
 
-/* 19 умножение на -1 */
+/* 19 negate */
 s21_decimal s21_negate(s21_decimal x) {
     s21_decimal res = x;
     if (res.value_type == s21_NORMAL_VALUE) {
@@ -466,7 +466,7 @@ s21_decimal s21_negate(s21_decimal x) {
     return res;
 }
 
-/* это побитовые сдвиги для массива интов */
+/* bit shifts */
 
 s21_decimal *s21_shift_right(s21_decimal *x) {
     for (int i = 0; i < 3; i++) {
@@ -510,7 +510,7 @@ void s21_shift(s21_decimal *arg2, int n) {
     }
 }
 
-/* алгоритм сложения */
+/* addition algorythm */
 s21_decimal s21_alg_add(s21_decimal x, s21_decimal y) {
     s21_decimal z;
     s21_init_decimal(&z);
@@ -538,13 +538,13 @@ s21_decimal s21_alg_add(s21_decimal x, s21_decimal y) {
     return z;
 }
 
-/* проверка на положительный децимал */
+/* check for positive */
 int s21_is_positive(s21_decimal x) {
     int true = 0;
     if (!(x.bits[3] & MAX_BIT)) true = 1;
     return true;
 }
-/* перевод в доп код */
+/* translate to additional code */
 s21_decimal s21_invert(s21_decimal x) {
     for (int i = 0; i < 3; i++) {
         x.bits[i] = ~x.bits[i];
@@ -554,7 +554,7 @@ s21_decimal s21_invert(s21_decimal x) {
     term.bits[0] = 1;
     return s21_alg_add(x, term);
 }
-/* модуль */
+/* modulus */
 s21_decimal s21_abs(s21_decimal x) {
     s21_decimal ret = x;
     char *p_to_scale = (char *)&(ret.bits[SCALE]) + 3 * sizeof(char);
@@ -563,7 +563,7 @@ s21_decimal s21_abs(s21_decimal x) {
     return ret;
 }
 
-/* выравнование скейлов */
+/* scales alignment */
 int s21_scale_align(s21_decimal *x, s21_decimal *y) {
   int sign_x = s21_get_sign(*x);
   int sign_y = s21_get_sign(*y);
@@ -612,26 +612,22 @@ int s21_scale_align(s21_decimal *x, s21_decimal *y) {
   return scale_res;
 }
 
-// в bits[3] между  16 - 23 битами
 int s21_get_scale(s21_decimal dec) {
     unsigned char *p_to_scale =
         (unsigned char *)&(dec.bits[SCALE]) + 2 * sizeof(char);
     return (int)*p_to_scale;
 }
 
-// в bits[3] между  16 - 23 битами
 void s21_set_scale(s21_decimal *dec, int scale) {
     char *p_to_scale = (char *)&(dec->bits[SCALE]) + 2 * sizeof(char);
     *p_to_scale = (char)scale;
 }
 
-// получение знака
 int s21_get_sign(s21_decimal dec) {
     unsigned int mask = MAX_BIT;
     return !!(mask & dec.bits[SCALE]);
 }
 
-// выставление знака
 void s21_set_sign(s21_decimal *dec) {
     unsigned int mask = MAX_BIT;
     dec->bits[SCALE] |= mask;
@@ -642,7 +638,7 @@ void s21_clear_sign(s21_decimal *dec) {
     dec->bits[SCALE] &= mask;
 }
 
-// Функции для работы с отдельными битами:
+// Functions for single bits
 
 int s21_get_bit(s21_decimal dec, unsigned int index) {
     unsigned int mask = 1u << (index % 32);
@@ -1003,14 +999,14 @@ int s21_from_decimal_to_string(s21_decimal decimal, char *string) {
     }
     if (scale) {
         if (scale == len) {
-            len++;  // для '0'
+            len++;
         }
         len++;
     }
     int sign = s21_get_sign(decimal);
     if (sign) {
         s21_clear_sign(&decimal);
-        len++;  // для '-'
+        len++;
     }
     char *p = string + len;
     result = len;
