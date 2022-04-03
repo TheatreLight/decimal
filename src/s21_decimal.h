@@ -27,41 +27,41 @@ typedef union float_to_int {
   float f;
 } float_to_int;
 
-// Добавил(если удобнее через дефайны можно убрать). Суть та же
+
 enum { LOW, MID, HIGH, SCALE };
 enum { TRUE, FALSE, SUCCESS = 0, CONVERTING_ERROR };
 
-s21_decimal s21_add(s21_decimal x, s21_decimal y);  // сложение
-s21_decimal s21_sub(s21_decimal x, s21_decimal y);  // вычитание
-s21_decimal s21_mul(s21_decimal x, s21_decimal y);  // умножение
-s21_decimal s21_div(s21_decimal x, s21_decimal y);  // деление
-s21_decimal s21_mod(s21_decimal x, s21_decimal y);  // взятие остатка
+s21_decimal s21_add(s21_decimal x, s21_decimal y);
+s21_decimal s21_sub(s21_decimal x, s21_decimal y);
+s21_decimal s21_mul(s21_decimal x, s21_decimal y);
+s21_decimal s21_div(s21_decimal x, s21_decimal y);
+s21_decimal s21_mod(s21_decimal x, s21_decimal y);
 
-int s21_is_less(s21_decimal x, s21_decimal y);              // <
-int s21_is_less_or_equal(s21_decimal x, s21_decimal y);     // <=
-int s21_is_greater(s21_decimal x, s21_decimal y);           // >
-int s21_is_greater_or_equal(s21_decimal x, s21_decimal y);  // >=
-int s21_is_equal(s21_decimal x, s21_decimal y);             // ==
-int s21_is_not_equal(s21_decimal x, s21_decimal y);         // !=
+int s21_is_less(s21_decimal x, s21_decimal y);
+int s21_is_less_or_equal(s21_decimal x, s21_decimal y);
+int s21_is_greater(s21_decimal x, s21_decimal y);
+int s21_is_greater_or_equal(s21_decimal x, s21_decimal y);
+int s21_is_equal(s21_decimal x, s21_decimal y);
+int s21_is_not_equal(s21_decimal x, s21_decimal y);
 
 int s21_from_int_to_decimal(int src, s21_decimal *dst);
 int s21_from_float_to_decimal(float src, s21_decimal *dst);
 int s21_from_decimal_to_int(s21_decimal src, int *dst);
 int s21_from_decimal_to_float(s21_decimal src, float *dst);
 
-s21_decimal s21_floor(s21_decimal x);  // до ближайшего целого в меньшую сторону
-s21_decimal s21_round(s21_decimal x);  // математическое округление
-s21_decimal s21_truncate(s21_decimal x);  // отбросить дробную часть
-s21_decimal s21_negate(s21_decimal x);  // результат умножения на -1
+s21_decimal s21_floor(s21_decimal x);
+s21_decimal s21_round(s21_decimal x);
+s21_decimal s21_truncate(s21_decimal x);
+s21_decimal s21_negate(s21_decimal x);
 
-s21_decimal s21_alg_add(s21_decimal x, s21_decimal y);  // алгоритм сложения
-int s21_is_positive(s21_decimal x);  // проверка на положительный децимал
-s21_decimal s21_invert(s21_decimal x);  // преобразование в дополнительный код
-s21_decimal s21_abs(s21_decimal x);  // модуль
-s21_decimal *s21_shift_right(s21_decimal *x);  // сдвиги на 1 бит всего децимала
+s21_decimal s21_alg_add(s21_decimal x, s21_decimal y);
+int s21_is_positive(s21_decimal x);
+s21_decimal s21_invert(s21_decimal x);
+s21_decimal s21_abs(s21_decimal x);
+s21_decimal *s21_shift_right(s21_decimal *x);
 s21_decimal *s21_shift_left(s21_decimal *x);
 void s21_shift(s21_decimal *arg2, int n);
-int s21_scale_align(s21_decimal *x, s21_decimal *y);  // выравнивание скейлов
+int s21_scale_align(s21_decimal *x, s21_decimal *y);
 
 int s21_get_scale(s21_decimal dec);
 void s21_set_scale(s21_decimal *dec, int scale);
